@@ -7,7 +7,7 @@ var Viou = (function (exports) {
     delay: 0,
     fadeSpeed: 250,
     offset: 16,
-    smartPosition: false,
+    smartPosition: true,
     onShow: null,
     onHide: null,
   };

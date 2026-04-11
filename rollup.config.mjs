@@ -15,6 +15,7 @@ export default [
         file: "dist/viou.js",
         format: "iife",
         name: "Viou",
+        exports: "default",
         sourcemap: true,
       },
     ],

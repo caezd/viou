@@ -1,1 +1,1 @@
-export { Viou } from "./core/Viou.js";
+export { Viou as default } from "./core/Viou.js";

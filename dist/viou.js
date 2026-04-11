@@ -1,4 +1,4 @@
-var Viou = (function (exports) {
+var Viou = (function () {
   'use strict';
 
   const defaults = {
@@ -406,9 +406,7 @@ var Viou = (function (exports) {
     }
   }
 
-  exports.Viou = Viou;
+  return Viou;
 
-  return exports;
-
-})({});
+})();
 //# sourceMappingURL=viou.js.map

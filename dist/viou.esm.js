@@ -403,5 +403,5 @@ class Viou {
   }
 }
 
-export { Viou };
+export { Viou as default };
 //# sourceMappingURL=viou.esm.js.map

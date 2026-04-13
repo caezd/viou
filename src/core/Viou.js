@@ -33,7 +33,7 @@ export class Viou {
 
     el = document.createElement("div");
     el.id = "viou";
-    Object.assign(el.style, { position: "absolute", display: "none", zIndex: 9999, opacity: 0 });
+    Object.assign(el.style, { position: "absolute", display: "none", zIndex: "9999", opacity: "0" });
     document.body.appendChild(el);
     this.tooltip = el;
   }
@@ -43,6 +43,7 @@ export class Viou {
   _show(el, event) {
     if (!hasContent(el)) return;
 
+    clearTimeout(this._delayTimer);
     stashTitle(el);
 
     this.tooltip.innerHTML = "";

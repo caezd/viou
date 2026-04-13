@@ -1,5 +1,11 @@
 import { getCachedImage, getCachedIcon } from "./cache.js";
 
+function makeDiv(className) {
+  const d = document.createElement("div");
+  d.className = className;
+  return d;
+}
+
 /**
  * Read data-viou-* attributes and build tooltip inner DOM.
  * Uses preloaded/cached image and icon nodes when available.
@@ -9,36 +15,32 @@ export function buildContent(el) {
   const head  = el.getAttribute("data-viou-head");
   const image = el.getAttribute("data-viou-image");
   const icon  = el.getAttribute("data-viou-icon");
-  const group = getComputedStyle(el).getPropertyValue("--group")?.trim() || null;
+  const group = getComputedStyle(el).getPropertyValue("--group").trim() || null;
 
   const wrap = document.createElement("div");
 
   if (image) {
-    const d = document.createElement("div");
-    d.className = "viou-image";
+    const d = makeDiv("viou-image");
     const img = getCachedImage(image) || Object.assign(document.createElement("img"), { src: image, alt: "" });
     d.appendChild(img);
     wrap.appendChild(d);
   }
 
   if (icon) {
-    const d = document.createElement("div");
-    d.className = "viou-image";
+    const d = makeDiv("viou-icon");
     const em = getCachedIcon(icon) || Object.assign(document.createElement("em"), { className: icon });
     d.appendChild(em);
     wrap.appendChild(d);
   }
 
   if (head) {
-    const d = document.createElement("div");
-    d.className = "viou-head";
+    const d = makeDiv("viou-head");
     d.textContent = head;
     wrap.appendChild(d);
   }
 
   if (title) {
-    const d = document.createElement("div");
-    d.className = "viou-text";
+    const d = makeDiv("viou-text");
     d.textContent = title;
     wrap.appendChild(d);
   }

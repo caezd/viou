@@ -1,23 +1,24 @@
 /**
- * Animate an element's opacity.
+ * Animate an element's opacity using requestAnimationFrame.
  * Returns a cancel function.
  */
-export function fadeTo(el, opacity, duration, cb) {
-  const step = 16;
-  const steps = Math.max(duration / step, 1);
-  const start = parseFloat(el.style.opacity) || 0;
-  const delta = (opacity - start) / steps;
-  let i = 0;
+export function fadeTo(el, targetOpacity, duration, cb) {
+  const from = parseFloat(el.style.opacity) || 0;
+  let id = null;
+  let startTs = null;
 
-  const id = setInterval(() => {
-    i++;
-    el.style.opacity = Math.min(Math.max(start + delta * i, 0), 1);
-    if (i >= steps) {
-      clearInterval(id);
-      el.style.opacity = opacity;
+  function tick(ts) {
+    if (!startTs) startTs = ts;
+    const progress = Math.min((ts - startTs) / duration, 1);
+    el.style.opacity = from + (targetOpacity - from) * progress;
+    if (progress < 1) {
+      id = requestAnimationFrame(tick);
+    } else {
+      el.style.opacity = targetOpacity;
       cb?.();
     }
-  }, step);
+  }
 
-  return () => clearInterval(id);
+  id = requestAnimationFrame(tick);
+  return () => cancelAnimationFrame(id);
 }
